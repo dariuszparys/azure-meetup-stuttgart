@@ -1,0 +1,13 @@
+FROM microsoft/aspnetcore-build
+WORKDIR /app
+COPY project.json .
+RUN dotnet restore
+
+COPY . .
+RUN dotnet publish --output /out/. --configuration Release
+
+# docker build -t build-image -f Dockerfile.build .
+
+# docker create --name build-cont build-image
+
+# docker cp build-cont:/out ./output
